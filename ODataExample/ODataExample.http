@@ -1,0 +1,100 @@
+@ODataExample_HostAddress = http://localhost:5224
+
+# OData Metadata
+GET {{ODataExample_HostAddress}}/odata/$metadata
+Accept: application/xml
+
+###
+
+# Get all Ulkeler
+GET {{ODataExample_HostAddress}}/odata/Ulkeler
+Accept: application/json
+
+###
+
+# Get Ulke with expand Sehirler
+GET {{ODataExample_HostAddress}}/odata/Ulkeler?$expand=Sehirler
+Accept: application/json
+
+###
+
+# Get all Sehirler with expand Ulke
+GET {{ODataExample_HostAddress}}/odata/Sehirler?$expand=Ulke
+Accept: application/json
+
+###
+
+# Get all Sehirler with expand Ulke and Ilceler
+GET {{ODataExample_HostAddress}}/odata/Sehirler?$expand=Ulke,Ilceler
+Accept: application/json
+
+###
+
+# Get all Ilceler with expand Sehir and Ulke
+GET {{ODataExample_HostAddress}}/odata/Ilceler?$expand=Sehir($expand=Ulke)
+Accept: application/json
+
+###
+
+# Filter Sehirler by UlkeId
+GET {{ODataExample_HostAddress}}/odata/Sehirler?$filter=UlkeId eq 1
+Accept: application/json
+
+###
+
+# Filter Ilceler by SehirId
+GET {{ODataExample_HostAddress}}/odata/Ilceler?$filter=SehirId eq 1
+Accept: application/json
+
+###
+
+# Get specific Ulke by Id
+GET {{ODataExample_HostAddress}}/odata/Ulkeler(1)
+Accept: application/json
+
+###
+
+# Create new Ulke
+POST {{ODataExample_HostAddress}}/odata/Ulkeler
+Content-Type: application/json
+
+{
+  "Kod": "FR",
+  "Ad": "Fransa"
+}
+
+###
+
+# Update Ulke
+PUT {{ODataExample_HostAddress}}/odata/Ulkeler(4)
+Content-Type: application/json
+
+{
+  "Id": 4,
+  "Kod": "FR",
+  "Ad": "France"
+}
+
+###
+
+# Create new Sehir
+POST {{ODataExample_HostAddress}}/odata/Sehirler
+Content-Type: application/json
+
+{
+  "Kod": "75",
+  "Ad": "Paris",
+  "UlkeId": 4
+}
+
+###
+
+# Create new Ilce
+POST {{ODataExample_HostAddress}}/odata/Ilceler
+Content-Type: application/json
+
+{
+  "Kod": "01",
+  "Ad": "1st Arrondissement", 
+  "SehirId": 7
+}
