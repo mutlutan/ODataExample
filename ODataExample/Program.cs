@@ -54,6 +54,10 @@ static IEdmModel GetEdmModel()
     builder.EntitySet<Ulke>("Ulkeler");
     builder.EntitySet<Sehir>("Sehirler");
     builder.EntitySet<Ilce>("Ilceler");
+
+    // Nufusu propertysini EDM modeline ekle
+    var sehirType = builder.EntityType<Sehir>();
+    sehirType.Property(s => s.Nufusu);
     
     return builder.GetEdmModel();
 }
